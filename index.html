@@ -491,16 +491,14 @@
         });
     }
 
-    // Function to update active button styling
-    function updateActiveButton(modalId) {
-        document.querySelectorAll("nav button, a[href='#']").forEach(btn => btn.classList.remove("active"));
-        document.querySelectorAll(`a[href='#']`).forEach(button => {
-            if (button.getAttribute("onclick")?.includes(modalId)) {
-                button.classList.add("active");
-            }
-        });
+    // Function to update active state on buttons/links
+    function updateActiveState(modalId) {
+        document.querySelectorAll("button, a").forEach(el => el.classList.remove("active"));
+        
+        // Find the button or link that triggered this modal
+        document.querySelectorAll(`button[onclick="openModal('${modalId}')"], a[onclick="openModal('${modalId}')"]`)
+            .forEach(el => el.classList.add("active"));
     }
-
     // Function to open modals
     window.openModal = function(modalId) {
         // Hide all modals
@@ -515,8 +513,8 @@
         // Reset audio when opening a modal
         resetAudioPlayers();
 
-        // Apply active button styling
-        updateActiveButton(modalId);
+       // Apply active class to the correct button/link
+       updateActiveState(modalId);
 
         // Update the URL without reloading the page
         const pathName = modalId.replace('Modal', '').toLowerCase();
@@ -539,8 +537,8 @@
         // Reset audio when closing modals
         resetAudioPlayers();
 
-        // Remove active button styling
-        document.querySelectorAll("nav button, a[href='#']").forEach(btn => btn.classList.remove("active"));
+        // Remove active link styling
+        document.querySelectorAll("a").forEach(link => link.classList.remove("active"));
 
         // Reset URL to home page ("/")
         history.pushState(null, null, "/");
