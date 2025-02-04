@@ -341,8 +341,8 @@
                         </div>
                     </div>
                 </div>
-                <script>document.addEventListener("DOMContentLoaded",()=>{const resetAudioPlayers=()=>{document.querySelectorAll(".audio-player").forEach((e)=>{const audio=e.querySelector("audio");const playPause=e.querySelector(".play-pause");const progress=e.querySelector(".progress input");const progressFill=e.querySelector(".progress-filled");audio.currentTime=0;audio.pause();playPause.className="play-pause play";playPause.innerHTML=`<svg class="icon" viewBox="0 0 30 30"><polygon points="10,6.9 10,23.1 24,15"></polygon></svg>`;progressFill.style.width="0%";progress.value=0})};resetAudioPlayers();document.querySelectorAll(".audio-player").forEach((e)=>{const audio=e.querySelector("audio");const playPause=e.querySelector(".play-pause");const progress=e.querySelector(".progress input");const progressFill=e.querySelector(".progress-filled");playPause.addEventListener("click",()=>{if(audio.paused){document.querySelectorAll("audio").forEach((a)=>a!==audio&&a.pause());audio.play()}else{audio.pause()}});audio.addEventListener("play",()=>{playPause.className="play-pause pause";playPause.innerHTML=`<svg class="icon" viewBox="0 0 30 30"><rect x="10" y="8" width="3" height="14"></rect><rect x="17" y="8" width="3" height="14"></rect>
-                </svg>`});audio.addEventListener("pause",()=>{playPause.className="play-pause play";playPause.innerHTML=`<svg class="icon" viewBox="0 0 30 30"><polygon points="10,6.9 10,23.1 24,15"></polygon></svg>`});audio.addEventListener("timeupdate",()=>{const percentage=(audio.currentTime/audio.duration)*100||0;progressFill.style.width=`${percentage}%`;progress.value=percentage});progress.addEventListener("input",()=>{audio.currentTime=(progress.value/100)*audio.duration})});window.addEventListener("pageshow",()=>{document.querySelectorAll(".audio-player audio").forEach((audio)=>{audio.currentTime=0;audio.pause()})});window.addEventListener("openModal",()=>{resetAudioPlayers()})})
+                <script>document.addEventListener("DOMContentLoaded",()=>{const resetAudioPlayers=()=>{document.querySelectorAll(".audio-player").forEach(e=>{const audio=e.querySelector("audio");const playPause=e.querySelector(".play-pause");const progress=e.querySelector(".progress input");const progressFill=e.querySelector(".progress-filled");audio.pause();audio.currentTime=0;playPause.className="play-pause play";playPause.innerHTML=`<svg class="icon" viewBox="0 0 30 30"><polygon points="10,6.9 10,23.1 24,15"></polygon></svg>`;progressFill.style.width="0%";progress.value=0})};document.querySelectorAll(".audio-player").forEach(e=>{const audio=e.querySelector("audio");const playPause=e.querySelector(".play-pause");const progress=e.querySelector(".progress input");const progressFill=e.querySelector(".progress-filled");playPause.addEventListener("click",()=>{if(!audio.src){audio.src=audio.getAttribute("data-src")}document.querySelectorAll("audio").forEach(a=>{if(a!==audio){a.pause()}});if(audio.paused){audio.play()}else{audio.pause()}});audio.addEventListener("play",()=>{playPause.className="play-pause pause";playPause.innerHTML=`<svg class="icon" viewBox="0 0 30 30"><rect x="10" y="8" width="3" height="14"></rect><rect x="17" y="8" width="3" height="14"></rect>
+                </svg>`});audio.addEventListener("pause",()=>{playPause.className="play-pause play";playPause.innerHTML=`<svg class="icon" viewBox="0 0 30 30"><polygon points="10,6.9 10,23.1 24,15"></polygon></svg>`});audio.addEventListener("timeupdate",()=>{const percentage=(audio.currentTime/audio.duration)*100||0;progressFill.style.width=`${percentage}%`;progress.value=percentage});progress.addEventListener("input",()=>{audio.currentTime=(progress.value/100)*audio.duration})});window.addEventListener("pageshow",resetAudioPlayers)})
                 </script>
             </div>
             <div id="newsModal" class="modal-stuff" style="display:none;">
@@ -481,13 +481,25 @@
         </script>
         <script>const setColorMode=(mode)=>{const label=document.querySelector('#theme-o-matic');document.documentElement.setAttribute('data-force-color-mode',mode);window.localStorage.setItem('color-mode',mode)};const applySavedMode=()=>{const savedMode=window.localStorage.getItem('color-mode');setColorMode(savedMode!==null?savedMode:'dark')};window.addEventListener('DOMContentLoaded',applySavedMode);window.addEventListener('pageshow',()=>{setTimeout(()=>{applySavedMode()},0)});document.querySelector('#theme-o-matic').addEventListener('click',()=>{const currentMode=document.documentElement.getAttribute('data-force-color-mode')||'dark';const newMode=currentMode==='light'?'dark':'light';setColorMode(newMode)})</script>
         <script>
-           document.addEventListener("DOMContentLoaded", function() {
+       document.addEventListener("DOMContentLoaded", function() {
     const path = window.location.pathname.replace('/', '');
 
-    // ✅ Hard refresh fix: Redirect to "/" if there's a slug in the URL and no referrer
-    if (path && document.getElementById(`${path}Modal`) === null) {
-        window.location.replace("/");
-        return; // Stop further script execution
+    // Function to reset all audio players
+    function resetAudioPlayers() {
+        document.querySelectorAll("audio").forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    }
+
+    // Function to update active button styling
+    function updateActiveButton(modalId) {
+        document.querySelectorAll("nav button, a[href='#']").forEach(btn => btn.classList.remove("active"));
+        document.querySelectorAll(`a[href='#']`).forEach(button => {
+            if (button.getAttribute("onclick")?.includes(modalId)) {
+                button.classList.add("active");
+            }
+        });
     }
 
     // Function to open modals
@@ -501,7 +513,13 @@
             modalContent.style.display = 'block';
         }
 
-        // Update the URL to reflect the modal without reloading the page
+        // Reset audio when opening a modal
+        resetAudioPlayers();
+
+        // Apply active button styling
+        updateActiveButton(modalId);
+
+        // Update the URL without reloading the page
         const pathName = modalId.replace('Modal', '').toLowerCase();
         if (window.location.pathname !== `/${pathName}`) {
             history.pushState({ modal: pathName }, null, `/${pathName}`);
@@ -519,6 +537,12 @@
             aboutModal.style.display = 'block';
         }
 
+        // Reset audio when closing modals
+        resetAudioPlayers();
+
+        // Remove active button styling
+        document.querySelectorAll("nav button, a[href='#']").forEach(btn => btn.classList.remove("active"));
+
         // Reset URL to home page ("/")
         history.pushState(null, null, "/");
     };
@@ -534,6 +558,7 @@
         }
     });
 });
+
             </script>
     </body>
 </html>
