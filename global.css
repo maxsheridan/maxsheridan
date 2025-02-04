@@ -149,7 +149,7 @@ nav button.active {
     }
 }
 
-main, .modal-stuff {
+.modal-stuff {
     width: 100%;
     padding-bottom: clamp(2rem, 2vw, 4rem)
 }
