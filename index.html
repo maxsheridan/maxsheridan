@@ -482,6 +482,15 @@
         <script>const setColorMode=(mode)=>{const label=document.querySelector('#theme-o-matic');document.documentElement.setAttribute('data-force-color-mode',mode);window.localStorage.setItem('color-mode',mode)};const applySavedMode=()=>{const savedMode=window.localStorage.getItem('color-mode');setColorMode(savedMode!==null?savedMode:'dark')};window.addEventListener('DOMContentLoaded',applySavedMode);window.addEventListener('pageshow',()=>{setTimeout(()=>{applySavedMode()},0)});document.querySelector('#theme-o-matic').addEventListener('click',()=>{const currentMode=document.documentElement.getAttribute('data-force-color-mode')||'dark';const newMode=currentMode==='light'?'dark':'light';setColorMode(newMode)})</script>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
+                // Check if the URL contains a slug on hard refresh
+                const path = window.location.pathname.replace('/', '');
+                
+                if (path && !document.referrer) {
+                    // If there's a slug and no referrer (indicating a hard refresh), redirect to homepage
+                    window.location.replace("/");
+                    return; // Stop script execution to prevent conflicts
+                }
+            
                 // Function to show the modal content based on modalId
                 window.openModal = function(modalId) {
                     const modalContent = document.getElementById(modalId);
@@ -535,15 +544,10 @@
                     }
                 });
             
-                // **NEW**: Reset the URL to the homepage if the URL includes any slug (i.e., a modal slug)
-                if (window.location.pathname !== '/') {
-                    // If the URL is not '/', we reset it to the homepage
-                    history.replaceState(null, null, "/");
-                    // Optionally, we can still open the default content after resetting the URL.
-                    const aboutContent = document.getElementById('about');
-                    if (aboutContent) {
-                        aboutContent.style.display = 'block';
-                    }
+                // Ensure About is displayed as default content
+                const aboutContent = document.getElementById('about');
+                if (aboutContent) {
+                    aboutContent.style.display = 'block';
                 }
             });
             </script>

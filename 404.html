@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
         <meta name="color-scheme" content="light dark">
+        <script>const colorModeOverride=window.localStorage.getItem('color-mode');const hasColorModeOverride=typeof colorModeOverride==='string';if(hasColorModeOverride){document.documentElement.setAttribute('data-force-color-mode',colorModeOverride)}</script>
         <link rel="preload" href="/assets/type/MD_IO.woff2" as="font" type="font/woff2" crossorigin>
         <title>Page Not Found - Max Sheridan</title>
         <link rel="stylesheet" href="/global.css" type="text/css">
@@ -25,7 +26,6 @@
                 </div>
             </div>
         </main>
-        <script>function updateThemeOnHtmlEl({theme:e}){document.querySelector("html").setAttribute("data-theme",e)}const currentTheme=sessionStorage.getItem("theme")||"dark";updateThemeOnHtmlEl({theme:currentTheme});</script>
-        <script src="/theme-o-matic.js" defer></script>
+        <script>const setColorMode=(mode)=>{const label=document.querySelector('#theme-o-matic');document.documentElement.setAttribute('data-force-color-mode',mode);window.localStorage.setItem('color-mode',mode)};const applySavedMode=()=>{const savedMode=window.localStorage.getItem('color-mode');setColorMode(savedMode!==null?savedMode:'dark')};window.addEventListener('DOMContentLoaded',applySavedMode);window.addEventListener('pageshow',()=>{setTimeout(()=>{applySavedMode()},0)});document.querySelector('#theme-o-matic').addEventListener('click',()=>{const currentMode=document.documentElement.getAttribute('data-force-color-mode')||'dark';const newMode=currentMode==='light'?'dark':'light';setColorMode(newMode)})</script>
     </body>
 </html>
