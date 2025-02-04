@@ -548,6 +548,9 @@
 
     // Reset URL hash to home
     window.location.hash = "";
+    
+    // **Remove hash from URL without reloading the page**
+    history.replaceState(null, null, window.location.pathname);
 };
 
 });
