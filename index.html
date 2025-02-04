@@ -480,28 +480,26 @@
         </script>
         <script>const setColorMode=(mode)=>{const label=document.querySelector('#theme-o-matic');document.documentElement.setAttribute('data-force-color-mode',mode);window.localStorage.setItem('color-mode',mode)};const applySavedMode=()=>{const savedMode=window.localStorage.getItem('color-mode');setColorMode(savedMode!==null?savedMode:'dark')};window.addEventListener('DOMContentLoaded',applySavedMode);window.addEventListener('pageshow',()=>{setTimeout(()=>{applySavedMode()},0)});document.querySelector('#theme-o-matic').addEventListener('click',()=>{const currentMode=document.documentElement.getAttribute('data-force-color-mode')||'dark';const newMode=currentMode==='light'?'dark':'light';setColorMode(newMode)})</script>
         <script>
-       document.addEventListener("DOMContentLoaded", function() {
-    const path = window.location.pathname.replace('/', '');
-
-    // Function to reset all audio players
-    function resetAudioPlayers() {
-        document.querySelectorAll("audio").forEach(audio => {
-            audio.pause();
-            audio.currentTime = 0;
-        });
-    }
-
-    // Function to update active state on buttons/links
-    function updateActiveState(modalId) {
-        document.querySelectorAll("button, a").forEach(el => el.classList.remove("active"));
-        
-        // Find the button or link that triggered this modal
-        document.querySelectorAll(`button[onclick="openModal('${modalId}')"], a[onclick="openModal('${modalId}')"]`)
-            .forEach(el => el.classList.add("active"));
-    }
-    // Function to open modals
-    window.openModal = function(modalId) {
-        // Hide all modals
+        document.addEventListener("DOMContentLoaded", function() {
+        const path = window.location.pathname.replace('/', '');
+        // Function to reset all audio players
+        function resetAudioPlayers() {
+            document.querySelectorAll("audio").forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        }
+        // Function to update active state on buttons/links
+        function updateActiveState(modalId) {
+            document.querySelectorAll("button, a").forEach(el => el.classList.remove("active"));
+            
+            // Find the button or link that triggered this modal
+            document.querySelectorAll(`button[onclick="openModal('${modalId}')"], a[onclick="openModal('${modalId}')"]`)
+                .forEach(el => el.classList.add("active"));
+        }
+        // Function to open modals
+        window.openModal = function(modalId) {
+            // Hide all modals
         document.querySelectorAll('.modal-stuff').forEach(modal => modal.style.display = 'none');
 
         // Show the requested modal
@@ -513,47 +511,47 @@
         // Reset audio when opening a modal
         resetAudioPlayers();
 
-       // Apply active class to the correct button/link
-       updateActiveState(modalId);
+        // Apply active class to the correct button/link
+        updateActiveState(modalId);
 
         // Update the URL without reloading the page
         const pathName = modalId.replace('Modal', '').toLowerCase();
         if (window.location.pathname !== `/${pathName}`) {
             history.pushState({ modal: pathName }, null, `/${pathName}`);
         }
-    };
+};
 
     // Function to close modals and return to the homepage (aboutModal)
     window.closeModal = function() {
-        // Hide all modals
-        document.querySelectorAll('.modal-stuff').forEach(modal => modal.style.display = 'none');
+    // Hide all modals
+    document.querySelectorAll('.modal-stuff').forEach(modal => modal.style.display = 'none');
 
-        // Show the aboutModal (home page content)
-        const aboutModal = document.getElementById('aboutModal');
-        if (aboutModal) {
-            aboutModal.style.display = 'block';
-        }
+    // Show the aboutModal (home page content)
+    const aboutModal = document.getElementById('aboutModal');
+    if (aboutModal) {
+        aboutModal.style.display = 'block';
+    }
 
-        // Reset audio when closing modals
-        resetAudioPlayers();
+    // Reset audio when closing modals
+    resetAudioPlayers();
 
-        // Remove active link styling
-        document.querySelectorAll("a").forEach(link => link.classList.remove("active"));
+    // Remove active link styling
+    document.querySelectorAll("a").forEach(link => link.classList.remove("active"));
 
-        // Reset URL to home page ("/")
-        history.pushState(null, null, "/");
-    };
+    // Reset URL to home page ("/")
+    history.pushState(null, null, "/");
+};
 
     // Handle back/forward navigation with popstate
     window.addEventListener('popstate', function(event) {
-        const path = window.location.pathname.replace('/', '');
+    const path = window.location.pathname.replace('/', '');
 
-        if (path && document.getElementById(`${path}Modal`)) {
-            openModal(`${path}Modal`);
-        } else {
-            closeModal();
-        }
-    });
+    if (path && document.getElementById(`${path}Modal`)) {
+        openModal(`${path}Modal`);
+    } else {
+        closeModal();
+    }
+});
 });
 
             </script>
