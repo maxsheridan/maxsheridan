@@ -391,21 +391,18 @@
                     </p>
                 </div>
             </div>
-            <div id="infoModal" class="modal-stuff" style="display:none;"><style>form{width:100%;margin-top:2rem}label{font-family:var(--font);font-weight:400;font-style:normal;color:var(--primary-color)}form input{width:100%;margin:1rem 0 2rem;padding:1rem .5rem;border-radius:.25rem;font-family:var(--font);font-size:var(--body-font-size);font-weight:400;font-style:normal;line-height:1.6;color:var(--form-field-color,var(--primary-color));background-color:var(--form-field-background-color)}textarea{min-width:100%;max-width:100%;min-height:100px;max-height:600px;margin:1rem 0 1rem;padding:1rem .5rem;border-radius:.25rem;font-family:var(--font);font-size:var(--body-font-size);font-weight:400;font-style:normal;line-height:1.6;color:var(--form-field-color,var(--primary-color));background-color:var(--form-field-background-color)}::placeholder{color:rgb(128 128 128 / .4);text-decoration:line-through}form p{margin-top:-1rem;color:var(--accent-color)}form button{border-radius:.25rem;margin:0 0 2rem;padding:1rem 2rem;font-family:var(--font);background:var(--accent-color);color:var(--background-color);cursor:pointer}button[type="submit"]:hover{color:var(--background-color);background-color:var(--primary-color)}</style>
+            <div id="infoModal" class="modal-stuff" style="display:none;"><style>form{width:100%;margin-top:2rem}label{font-family:var(--font);font-weight:400;font-style:normal;color:var(--primary-color)}form input{width:100%;margin:1rem 0 2rem;padding:1rem .5rem;border-radius:.25rem;font-family:var(--font);font-size:var(--body-font-size);font-weight:400;font-style:normal;line-height:1.6;color:var(--form-field-color,var(--primary-color));background-color:var(--form-field-background-color)}textarea{min-width:100%;max-width:100%;min-height:100px;max-height:600px;margin:1rem 0 1rem;padding:1rem .5rem;border-radius:.25rem;font-family:var(--font);font-size:var(--body-font-size);font-weight:400;font-style:normal;line-height:1.6;color:var(--form-field-color,var(--primary-color));background-color:var(--form-field-background-color)}::placeholder{color:rgb(128 128 128 / .4);text-decoration:line-through}form p{margin-top:-1rem;color:var(--accent-color)}form button{border-radius:.25rem;margin:1rem 0 2rem;padding:1rem 2rem;font-family:var(--font);background:var(--accent-color);color:var(--background-color);cursor:pointer}button[type="submit"]:hover{color:var(--background-color);background-color:var(--primary-color)}</style>
                 <h2>Info</h2>
                 <p>
                     This site is a few HTML files hosted on GitHub. Type is  MD IO by Rutherford Craze. Design by&#32;<a href="#" onclick="openModal('tugWellsModal'); return false;" aria-label="Open Tug Wells">Tug Wells</a>. Fill out the form to get in touch.
                 </p>
                 <form id="contactForm" name="contactForm">
-                    <label for="entry.827037062">Name</label><br>
-                    <input type="text" name="entry.827037062" id="entry.827037062" required><br>
-                    <span class="error-message"></span>
-                    <label for="entry.1983459528">Email</label><br>
-                    <input type="email" name="entry.1983459528" id="entry.1983459528" required><br>
-                    <span class="error-message"></span>
-                    <label for="entry.1950049378">Message</label><br>
-                    <textarea name="entry.1950049378" id="entry.1950049378" placeholder="Dear maxsheridan.com, I’ve spotted some serious errors on your website." required></textarea><br><br>
-                    <span class="error-message"></span>
+                    <label for="entry.827037062">Name</label>
+                    <input type="text" name="entry.827037062" id="entry.827037062" required>
+                    <label for="entry.1983459528">Email</label>
+                    <input type="email" name="entry.1983459528" id="entry.1983459528" required>
+                    <label for="entry.1950049378">Message</label>
+                    <textarea name="entry.1950049378" id="entry.1950049378" placeholder="Dear maxsheridan.com, I’ve spotted some serious errors on your website." required></textarea>
                     <button type="submit">Send</button>
                 </form>
             </div>
@@ -455,13 +452,10 @@
                     We take your bafflement and&thinsp;/&thinsp;or dismay at this website seriously. Your secret code is&#32;<span id="secret-code"></span>. Please keep it handy for future communication.
                 </p>
                 <form id="queryForm" name="queryForm">
-                    <label for="entry.1854071305">Secret Code</label><br>
-                    <input type="text" name="entry.1854071305" id="entry.1854071305" placeholder="Eimuntas Nekrošius" required><br>
-                    <span class="error-message"></span>
-                
+                    <label for="entry.1854071305">Secret Code</label>
+                    <input type="text" name="entry.1854071305" id="entry.1854071305" placeholder="Eimuntas Nekrošius" required>
                     <label for="entry.1254595295">Feedback</label><br>
-                    <textarea name="entry.1254595295" id="entry.1254595295" placeholder="Where is the home button?!?" required></textarea><br>
-                    <span class="error-message"></span><br>
+                    <textarea name="entry.1254595295" id="entry.1254595295" placeholder="Where is the home button?!?" required></textarea>
                     <button type="submit">Send</button>
                 </form>
                 <a href="#" onclick="window.history.back(); return false;" aria-label="Go back">
