@@ -258,18 +258,6 @@ hr {
     color: var(--accent-color);
 }
 
-.input-error {
-    border: 2px solid red;
-    background-color: #ffe6e6;
-    box-sizing:content-box;
-}
-
-.error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-}
-
 @media (max-width:768px) {
     header {
         padding: 2rem 1rem 0
