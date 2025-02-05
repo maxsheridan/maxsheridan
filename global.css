@@ -254,6 +254,21 @@ hr {
     margin-bottom: 1px
 }
 
+.danke {
+    color: var(--accent-color);
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+input:invalid, textarea:invalid {
+    border-color: red;
+}
+
+
 @media (max-width:768px) {
     header {
         padding: 2rem 1rem 0
