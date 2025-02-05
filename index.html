@@ -396,13 +396,16 @@
                 <p>
                     This site is a few HTML files hosted on GitHub. Type is  MD IO by Rutherford Craze. Design by&#32;<a href="#" onclick="openModal('tugWellsModal'); return false;" aria-label="Open Tug Wells">Tug Wells</a>. Fill out the form to get in touch.
                 </p>
-                <form id="contactForm" name="contactForm" target="hidden_iframe_1" onsubmit="submitted=true;" action="https://docs.google.com/forms/d/e/1FAIpQLSd77W4y_BozhZ_z5f_Bh7ckV6vuqJFw89PwSC48mN67u2HMuQ/formResponse?">
+                <form id="contactForm" name="contactForm">
                     <label for="entry.827037062">Name</label><br>
-                    <input type="text" name="entry.827037062" id="entry.827037062" ><br>
+                    <input type="text" name="entry.827037062" id="entry.827037062" required><br>
+                    <span class="error-message"></span>
                     <label for="entry.1983459528">Email</label><br>
-                    <input type="text" name="entry.1983459528" id="entry.1983459528"><br>
+                    <input type="email" name="entry.1983459528" id="entry.1983459528" required><br>
+                    <span class="error-message"></span>
                     <label for="entry.1950049378">Message</label><br>
-                    <textarea name="entry.1950049378" id="entry.1950049378" placeholder="Dear maxsheridan.com, I’ve spotted some serious errors on your website."></textarea><br><br>
+                    <textarea name="entry.1950049378" id="entry.1950049378" placeholder="Dear maxsheridan.com, I’ve spotted some serious errors on your website." required></textarea><br><br>
+                    <span class="error-message"></span>
                     <button type="submit">Send</button>
                 </form>
             </div>
@@ -451,11 +454,14 @@
                 <p>
                     We take your bafflement and&thinsp;/&thinsp;or dismay at this website seriously. Your secret code is&#32;<span id="secret-code"></span>. Please keep it handy for future communication.
                 </p>
-                <form id="queryForm" name="queryForm" target="hidden_iframe_2" onsubmit="submitted=true;" action="https://docs.google.com/forms/d/e/1FAIpQLSdFOyyvnpaDhECFkVOSxcj_DrVqcKi2muiGAi036sWST0xKag/formResponse?">
+                <form id="queryForm" name="queryForm">
                     <label for="entry.1854071305">Secret Code</label><br>
-                    <input type="text" name="entry.1854071305" id="entry.1854071305" placeholder="Eimuntas Nekrošius"><br>
+                    <input type="text" name="entry.1854071305" id="entry.1854071305" placeholder="Eimuntas Nekrošius" required><br>
+                    <span class="error-message"></span>
+                
                     <label for="entry.1254595295">Feedback</label><br>
-                    <textarea name="entry.1254595295" id="entry.1254595295" placeholder="Where is the home button?!?"></textarea><br><br>
+                    <textarea name="entry.1254595295" id="entry.1254595295" placeholder="Where is the home button?!?" required></textarea><br>
+                    <span class="error-message"></span><br>
                     <button type="submit">Send</button>
                 </form>
                 <a href="#" onclick="window.history.back(); return false;" aria-label="Go back">
@@ -475,6 +481,6 @@
         </script>
         <script>const setColorMode=(mode)=>{document.documentElement.setAttribute('data-force-color-mode',mode)};const applyDarkModeOnLoad=()=>{setColorMode('dark')};window.addEventListener('DOMContentLoaded',applyDarkModeOnLoad);window.addEventListener('pageshow',()=>{setTimeout(()=>{applyDarkModeOnLoad()},0)});document.querySelector('#theme-o-matic').addEventListener('click',()=>{const currentMode=document.documentElement.getAttribute('data-force-color-mode')||'dark';const newMode=currentMode==='light'?'dark':'light';setColorMode(newMode)});</script>
         <script>document.addEventListener("DOMContentLoaded",function(){function resetAudioPlayers(){document.querySelectorAll("audio").forEach(audio=>{audio.pause();audio.currentTime=0})}function resetForms(){if(typeof window.resetForms==="function"){window.resetForms()}}function updateActiveState(modalId){document.querySelectorAll("button, a").forEach(el=>el.classList.remove("active"));document.querySelectorAll(`button[onclick="openModal('${modalId}')"], a[onclick="openModal('${modalId}')"]`).forEach(el=>el.classList.add("active"))}window.openModal=function(modalId){document.querySelectorAll('.modal-stuff').forEach(modal=>modal.style.display='none');const modalContent=document.getElementById(modalId);if(modalContent){modalContent.style.display='block'}resetAudioPlayers();resetForms();updateActiveState(modalId);window.location.hash=modalId.replace('Modal','')};window.addEventListener('hashchange',function(){const hash=window.location.hash.replace('#','');if(hash&&document.getElementById(`${hash}Modal`)){openModal(`${hash}Modal`)}else{resetToHome()}});window.resetToHome=function(){document.querySelectorAll('.modal-stuff').forEach(modal=>modal.style.display='none');const aboutModal=document.getElementById('aboutModal');if(aboutModal){aboutModal.style.display='block'}document.querySelectorAll("button, a").forEach(el=>el.classList.remove("active"));resetForms();history.replaceState(null,null,window.location.pathname)};const hash=window.location.hash.replace('#','');if(hash&&document.getElementById(`${hash}Modal`)){openModal(`${hash}Modal`)}else{resetToHome()}});</script>
-        <script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("form").forEach((form)=>{form.addEventListener("submit",function(event){event.preventDefault();form.style.display="none";const message=document.createElement("p");message.classList.add("danke");message.textContent=form.id==="queryForm"?"Thanks for your feedback!":"Message received.";form.parentElement.insertBefore(message,form.nextSibling)})});function resetForms(){document.querySelectorAll("form").forEach(form=>{form.reset();form.style.display="block";form.parentElement.querySelector(".danke")?.remove()})}window.resetForms=resetForms;document.querySelectorAll(".modal-stuff").forEach(modal=>{modal.addEventListener("transitionend",function(){if(modal.style.display==="none"){resetForms()}})})})</script>
+        <script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("form").forEach((form)=>{form.addEventListener("submit",function(event){event.preventDefault();let isValid=!0;form.querySelectorAll(".error-message").forEach(msg=>msg.textContent="");form.querySelectorAll("input, textarea").forEach(input=>input.classList.remove("input-error"));form.querySelectorAll("input[required], textarea[required]").forEach((input)=>{if(!input.value.trim()){isValid=!1;input.classList.add("input-error");input.nextElementSibling.textContent="This field is required."}});if(!isValid)return;let formData=new FormData(form);let formURL=form.id==="queryForm"?"https://docs.google.com/forms/d/e/1FAIpQLSdFOyyvnpaDhECFkVOSxcj_DrVqcKi2muiGAi036sWST0xKag/formResponse?":"https://docs.google.com/forms/d/e/1FAIpQLSd77W4y_BozhZ_z5f_Bh7ckV6vuqJFw89PwSC48mN67u2HMuQ/formResponse?";fetch(formURL,{method:"POST",mode:"no-cors",body:formData}).then(()=>{form.style.display="none";const message=document.createElement("p");message.classList.add("danke");message.textContent=form.id==="queryForm"?"Thanks for your feedback!":"Message received.";form.parentElement.insertBefore(message,form.nextSibling)}).catch(error=>console.error("Error!",error))})});function resetForms(){document.querySelectorAll("form").forEach(form=>{form.reset();form.style.display="block";form.parentElement.querySelector(".danke")?.remove();form.querySelectorAll("input, textarea").forEach(input=>input.classList.remove("input-error"));form.querySelectorAll(".error-message").forEach(msg=>msg.textContent="")})}window.resetForms=resetForms;document.querySelectorAll(".modal-stuff").forEach(modal=>{modal.addEventListener("transitionend",function(){if(modal.style.display==="none"){resetForms()}})})});</script>
     </body>
 </html>
