@@ -158,7 +158,7 @@ section:not(:last-child) {
 }
 
 .some-news:not(:last-child) {
-    margin-bottom: 1.5rem
+    margin-bottom: 2.75rem
 }
 
 .some-media:not(:last-child) {
@@ -232,12 +232,6 @@ h2 {
     font-style: normal;
     margin: 0 0 1.5rem;
     color: var(--primary-color)
-}
-
-hr {
-    border: 1px dashed var(--primary-color);
-    background: none;
-    margin: 2rem 0
 }
 
 .moolah {
